@@ -58,10 +58,8 @@ import com.folioreader.ui.adapter.FolioPageFragmentAdapter
 import com.folioreader.ui.adapter.SearchAdapter
 import com.folioreader.ui.fragment.FolioPageFragment
 import com.folioreader.ui.fragment.MediaControllerFragment
-import com.folioreader.ui.view.ConfigBottomSheetDialogFragment
-import com.folioreader.ui.view.DirectionalViewpager
-import com.folioreader.ui.view.FolioAppBarLayout
-import com.folioreader.ui.view.MediaControllerCallback
+import com.folioreader.ui.fragment.TableOfContentFragment2
+import com.folioreader.ui.view.*
 import com.folioreader.util.AppUtil
 import com.folioreader.util.FileUtil
 import com.folioreader.util.UiUtil
@@ -306,9 +304,9 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
         val config = AppUtil.getSavedConfig(applicationContext)!!
 
-        val drawable = ContextCompat.getDrawable(this, R.drawable.ic_drawer)
-        UiUtil.setColorIntToDrawable(config.themeColor, drawable!!)
-        toolbar!!.navigationIcon = drawable
+        //val drawable = ContextCompat.getDrawable(this, R.drawable.ic_i_drawer_3)
+        //UiUtil.setColorIntToDrawable(config.themeColor, drawable!!)
+        //toolbar!!.navigationIcon = drawable
 
         if (config.isNightMode) {
             setNightMode()
@@ -379,7 +377,7 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
 
         if (itemId == android.R.id.home) {
             Log.v(LOG_TAG, "-> onOptionsItemSelected -> drawer")
-            startContentHighlightActivity()
+            startContentHighlightActivity(MODE_CONTENT)
             return true
 
         } else if (itemId == R.id.itemSearch) {
@@ -403,16 +401,22 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
             Log.v(LOG_TAG, "-> onOptionsItemSelected -> " + item.title)
             showMediaController()
             return true
+        } else if ((itemId == R.id.actionIndex)) {
+            startContentHighlightActivity(MODE_CONTENT)
+        }
+        else if ((itemId == R.id.actionBookmarked)) {
+            startContentHighlightActivity(MODE_HIGHLIGHT)
         }
 
         return super.onOptionsItemSelected(item)
     }
 
-    fun startContentHighlightActivity() {
+    private fun startContentHighlightActivity(mode: String) {
 
         val intent = Intent(this@FolioActivity, ContentHighlightActivity::class.java)
 
         intent.putExtra(Constants.PUBLICATION, pubBox!!.publication)
+        intent.putExtra(MODE, mode)
         try {
             intent.putExtra(CHAPTER_SELECTED, spine!![currentChapterIndex].href)
         } catch (e: NullPointerException) {
@@ -427,7 +431,7 @@ class FolioActivity : AppCompatActivity(), FolioActivityCallback, MediaControlle
         intent.putExtra(Constants.BOOK_TITLE, bookFileName)
 
         startActivityForResult(intent, RequestCode.CONTENT_HIGHLIGHT.value)
-        overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
+        //overridePendingTransition(R.anim.slide_in_up, R.anim.slide_out_up)
     }
 
     fun showConfigBottomSheetDialogFragment() {

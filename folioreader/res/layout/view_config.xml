@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
-    android:layout_height="203dp"
-    tools:layout_gravity="bottom">
+    android:layout_height="wrap_content"
+    android:padding="@dimen/margin_size_medium">
 
     <ImageButton
         android:id="@+id/view_config_ib_day_mode"
@@ -14,7 +14,9 @@
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toStartOf="@+id/view_config_ib_night_mode"
         app:layout_constraintStart_toStartOf="parent"
-        app:srcCompat="@drawable/icon_sun_sel" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_sun_sel"
+        android:visibility="gone"/>
 
     <ImageButton
         android:id="@+id/view_config_ib_night_mode"
@@ -23,72 +25,134 @@
         android:background="@android:color/transparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view_config_ib_day_mode"
-        app:srcCompat="@drawable/icon_moon_sel" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/icon_moon_sel"
+        android:visibility="gone"/>
 
-    <View
-        android:id="@+id/view3"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/grey_color"
-        app:layout_constraintEnd_toEndOf="parent"
+    <TextView
+        android:id="@+id/textView2"
+        style="@style/app_secondary_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/text_style"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/view_config_ib_night_mode" />
 
-    <com.folioreader.ui.view.StyleableTextView
-        android:id="@+id/view_config_font_andada"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/andada"
-        android:textSize="17sp"
-        app:layout_constraintEnd_toStartOf="@+id/view_config_font_lato"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <com.folioreader.ui.view.StyleableTextView
-        android:id="@+id/view_config_font_lato"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/lato"
-        android:textSize="17sp"
-        app:folio_font="@string/lato_font"
-        app:layout_constraintEnd_toStartOf="@+id/view_config_font_lora"
-        app:layout_constraintStart_toEndOf="@+id/view_config_font_andada"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <com.folioreader.ui.view.StyleableTextView
-        android:id="@+id/view_config_font_lora"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/lora"
-        android:textSize="17sp"
-        app:folio_font="@string/lora_font"
-        app:layout_constraintEnd_toStartOf="@+id/view_config_font_raleway"
-        app:layout_constraintStart_toEndOf="@+id/view_config_font_lato"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <com.folioreader.ui.view.StyleableTextView
-        android:id="@+id/view_config_font_raleway"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/raleway"
-        android:textSize="17sp"
-        app:folio_font="@string/raleway_font"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/view_config_font_lora"
-        app:layout_constraintTop_toBottomOf="@+id/view3" />
-
-    <View
-        android:id="@+id/view4"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/grey_color"
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        app:chipBackgroundColor="@color/gray_text"
+        app:chipStrokeColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_config_font_lato" />
+        app:layout_constraintTop_toBottomOf="@+id/textView2"
+        app:singleSelection="true">
+
+        <com.folioreader.ui.view.StyleableTextView
+            android:id="@+id/view_config_font_andada"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/andada"
+            app:layout_constraintEnd_toStartOf="@+id/view_config_font_lato"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
+        <com.folioreader.ui.view.StyleableTextView
+            android:id="@+id/view_config_font_lato"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/lato"
+            app:folio_font="@string/lato_font"
+            app:layout_constraintEnd_toStartOf="@+id/view_config_font_lora"
+            app:layout_constraintStart_toEndOf="@+id/view_config_font_andada"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
+        <com.folioreader.ui.view.StyleableTextView
+            android:id="@+id/view_config_font_lora"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/lora"
+            app:folio_font="@string/lora_font"
+            app:layout_constraintEnd_toStartOf="@+id/view_config_font_raleway"
+            app:layout_constraintStart_toEndOf="@+id/view_config_font_lato"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
+        <com.folioreader.ui.view.StyleableTextView
+            android:id="@+id/view_config_font_raleway"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/raleway"
+            app:folio_font="@string/raleway_font"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/view_config_font_lora"
+            app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
+    </com.google.android.material.chip.ChipGroup>
+
+    <TextView
+        android:id="@+id/textView3"
+        style="@style/app_secondary_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_small_x"
+        android:text="@string/text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_group" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:id="@+id/chip_group_font_size"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_small_x"
+        app:layout_constraintTop_toBottomOf="@+id/textView3"
+        app:singleSelection="true">
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/font_xs"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/font_size_xs" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/font_s"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/font_size_s" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/font_m"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/font_size_m" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/font_l"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/font_size_l" />
+
+        <com.google.android.material.chip.Chip
+            android:id="@+id/font_xl"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/font_size_xl" />
+
+    </com.google.android.material.chip.ChipGroup>
 
     <ImageView
         android:id="@+id/view_config_iv_label_font_small"
@@ -97,12 +161,12 @@
         android:layout_margin="8dp"
         android:adjustViewBounds="false"
         android:scaleType="center"
-        android:tint="@color/grey_color"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toStartOf="@+id/view_config_font_size_seek_bar"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view4"
-        app:srcCompat="@drawable/ic_format_font_black_24dp" />
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_font_size"
+        app:srcCompat="@drawable/ic_format_font_black_24dp"
+        android:visibility="gone"
+        app:tint="@color/grey_color" />
 
     <ImageView
         android:id="@+id/view_config_iv_label_font_big"
@@ -111,57 +175,57 @@
         android:layout_margin="8dp"
         android:cropToPadding="false"
         android:scaleType="center"
-        android:tint="@color/grey_color"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/view_config_font_size_seek_bar"
-        app:layout_constraintTop_toBottomOf="@+id/view4"
-        app:srcCompat="@drawable/ic_format_font_black_36dp" />
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_font_size"
+        app:srcCompat="@drawable/ic_format_font_black_36dp"
+        android:visibility="gone"
+        app:tint="@color/grey_color" />
 
     <SeekBar
         android:id="@+id/view_config_font_size_seek_bar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:max="4"
-        app:layout_constraintBottom_toTopOf="@+id/view5"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/textView4"
         app:layout_constraintEnd_toStartOf="@+id/view_config_iv_label_font_big"
         app:layout_constraintStart_toEndOf="@+id/view_config_iv_label_font_small"
-        app:layout_constraintTop_toBottomOf="@+id/view4" />
+        app:layout_constraintTop_toTopOf="@+id/view_config_iv_label_font_small" />
 
-    <View
-        android:id="@+id/view5"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:background="@color/grey_color"
-        app:layout_constraintBottom_toTopOf="@+id/buttonVertical"
+    <TextView
+        android:id="@+id/textView4"
+        style="@style/app_secondary_text_style"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_small_x"
+        android:text="@string/scroll_direction"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chip_group_font_size" />
+
+    <com.google.android.material.chip.ChipGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_size_small_x"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view_config_iv_label_font_small" />
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        app:singleSelection="true">
 
-    <com.folioreader.util.StyleableTextView
-        android:id="@+id/buttonVertical"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/direction_vertical"
-        android:textSize="17sp"
-        app:folio_font="@string/lato_font"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonHorizontal"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipVertical"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/direction_vertical" />
 
-    <com.folioreader.util.StyleableTextView
-        android:id="@+id/buttonHorizontal"
-        android:layout_width="0dp"
-        android:layout_height="50dp"
-        android:gravity="center"
-        android:text="@string/direction_horizontal"
-        android:textSize="17sp"
-        app:folio_font="@string/lato_font"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/buttonVertical"
-        app:layout_constraintTop_toBottomOf="@+id/view5" />
+        <com.google.android.material.chip.Chip
+            android:id="@+id/chipHorizontal"
+            style="@style/Widget.MaterialComponents.Chip.Choice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/direction_horizontal" />
+
+    </com.google.android.material.chip.ChipGroup>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

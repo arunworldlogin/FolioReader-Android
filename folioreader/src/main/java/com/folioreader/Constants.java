@@ -12,6 +12,9 @@ public class Constants {
     public static final String CHAPTER_SELECTED = "chapter_selected";
     public static final String HIGHLIGHT_SELECTED = "highlight_selected";
     public static final String BOOK_TITLE = "book_title";
+    public static final String MODE = "MODE";
+    public static final String MODE_CONTENT = "MODE_CONTENT";
+    public static final String MODE_HIGHLIGHT = "MODE_HIGHLIGHT";
 
     public static final String LOCALHOST = "http://127.0.0.1";
     public static final int DEFAULT_PORT_NUMBER = 8080;

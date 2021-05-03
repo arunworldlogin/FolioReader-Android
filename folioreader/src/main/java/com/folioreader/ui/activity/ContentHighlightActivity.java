@@ -4,10 +4,12 @@ import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentTransaction;
 import com.folioreader.Config;
@@ -24,16 +26,19 @@ public class ContentHighlightActivity extends AppCompatActivity {
     private boolean mIsNightMode;
     private Config mConfig;
     private Publication publication;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_content_highlight);
-        if (getSupportActionBar() != null) {
-            getSupportActionBar().hide();
-        }
 
+        toolbar = findViewById(R.id.content_highlight_toolbar);
+        setSupportActionBar(toolbar);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
         publication = (Publication) getIntent().getSerializableExtra(Constants.PUBLICATION);
 
         mConfig = AppUtil.getSavedConfig(this);
@@ -93,6 +98,15 @@ public class ContentHighlightActivity extends AppCompatActivity {
                 loadHighlightsFragment();
             }
         });
+
+        String mode = getIntent().getStringExtra(Constants.MODE);
+        if (mode.equals(Constants.MODE_CONTENT)) {
+            loadContentFragment();
+            getSupportActionBar().setTitle(getString(R.string.table_of_contents));
+        } else if (mode.equals(Constants.MODE_HIGHLIGHT)) {
+            loadHighlightsFragment();
+            getSupportActionBar().setTitle(getString(R.string.your_boonbmarks));
+        }
     }
 
     private void loadContentFragment() {
@@ -117,4 +131,11 @@ public class ContentHighlightActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

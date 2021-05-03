@@ -5,8 +5,10 @@ import android.util.AttributeSet;
 import androidx.appcompat.widget.AppCompatTextView;
 import com.folioreader.R;
 import com.folioreader.util.UiUtil;
+import com.google.android.material.button.MaterialButton;
+import com.google.android.material.chip.Chip;
 
-public class StyleableTextView extends AppCompatTextView {
+public class StyleableTextView extends Chip {
 
     public StyleableTextView(Context context) {
         super(context);

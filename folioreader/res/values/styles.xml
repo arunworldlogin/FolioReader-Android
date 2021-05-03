@@ -2,11 +2,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="windowActionBar">false</item>
     </style>
 
     <!--
@@ -128,6 +129,34 @@
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:statusBarColor" tools:targetApi="lollipop">@color/black</item>
+    </style>
+
+    <style name="app_secondary_text_style" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/secondary_text_color</item>
+        <item name="android:textSize">@dimen/font_size_14_sp</item>
+    </style>
+
+    <style name="app_primary_header" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="abril_primary_header" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/abril_fatface</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textColor">@color/primary_text_color</item>
+        <item name="android:textSize">@dimen/font_size_large</item>
+    </style>
+
+    <style name="toggle_button_style" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="fontFamily">@font/open_sans_semibold</item>
+        <item name="android:fontFamily">@font/open_sans_semibold</item>
+        <item name="android:textSize">@dimen/font_size_small</item>
+        <item name="textAllCaps">false</item>
     </style>
 
 </resources>

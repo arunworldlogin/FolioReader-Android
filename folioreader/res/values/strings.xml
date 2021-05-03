@@ -99,6 +99,8 @@
 
     <string name="menu_item_search">Search</string>
     <string name="menu_item_config">Configuration</string>
+    <string name="menu_item_contents">Contents</string>
+    <string name="menu_item_bookmarks">Bookmarks</string>
     <string name="menu_item_tts">Text To Speech</string>
 
     <string name="search_hint">Search In Book</string>
@@ -115,5 +117,17 @@
     <string name="callScrollToCfi" translatable="false">javascript:scrollToCfi(\"%s\")</string>
     <string name="callHighlightSearchLocator" translatable="false">javascript:highlightSearchLocator(\"%s\")</string>
     <string name="callClearSelection" translatable="false">javascript:clearSelection()</string>
+    <string name="text_style">Text Style</string>
+    <string name="text_size">Text Size</string>
+    <string name="font_size_xs">XS</string>
+    <string name="font_size_s">S</string>
+    <string name="font_size_m">M</string>
+    <string name="font_size_l">L</string>
+    <string name="font_size_xl">XL</string>
+    <string name="scroll_direction">Scroll Direction</string>
+    <string name="scroll_horizontal">Horizontal</string>
+    <string name="scroll_vertical">Vertical</string>
+    <string name="table_of_contents">Table of contents</string>
+    <string name="your_boonbmarks">Your bookmarks</string>
 
 </resources>

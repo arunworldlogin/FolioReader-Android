@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class TOCAdapter extends MultiLevelExpIndListAdapter {
 
-    private static final int LEVEL_ONE_PADDING_PIXEL = 15;
+    private static final int LEVEL_ONE_PADDING_PIXEL = 0;
 
     private TOCCallback callback;
     private final Context mContext;
@@ -74,7 +74,7 @@ public class TOCAdapter extends MultiLevelExpIndListAdapter {
         }
 
         int leftPadding = getPaddingPixels(mContext, LEVEL_ONE_PADDING_PIXEL) * (tocLinkWrapper.getIndentation());
-        viewHolder.view.setPadding(leftPadding, 0, 0, 0);
+        viewHolder.view.setPadding(0, 0, 0, 0);
 
         // set color to each indentation level
         if (tocLinkWrapper.getIndentation() == 0) {

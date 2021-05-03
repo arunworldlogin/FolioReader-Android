@@ -29,4 +29,9 @@
     <color name="highlight_blue">#ADD8FF</color>
     <color name="highlight_pink">#FFB0CA</color>
 
+    <color name="color_deep_orange">#FFFF3D00</color>
+    <color name="secondary_text_color">#373737</color>
+    <color name="primary_text_color">#1E1E1E</color>
+    <color name="bottom_sheet_background">#f8fbf8</color>
+
 </resources>

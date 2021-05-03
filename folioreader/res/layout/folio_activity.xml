@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <com.folioreader.ui.view.FolioAppBarLayout
         android:id="@+id/appBarLayout"
@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
+        android:theme="@style/AppTheme"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.appcompat.widget.Toolbar
@@ -32,6 +33,7 @@
             android:layout_height="?android:attr/actionBarSize"
             app:contentInsetLeft="0dp"
             app:contentInsetStart="0dp"
+            app:titleMarginStart="@dimen/margin_size_small_x"
             app:contentInsetStartWithNavigation="0dp" />
 
     </com.folioreader.ui.view.FolioAppBarLayout>

@@ -8,7 +8,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.FrameLayout
 import android.widget.SeekBar
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -21,8 +20,6 @@ import com.folioreader.ui.activity.FolioActivityCallback
 import com.folioreader.ui.fragment.MediaControllerFragment
 import com.folioreader.util.AppUtil
 import com.folioreader.util.UiUtil
-import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import kotlinx.android.synthetic.main.view_config.*
 import org.greenrobot.eventbus.EventBus
@@ -48,18 +45,8 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         if (activity is FolioActivity)
             activityCallback = activity as FolioActivity
-
-        view.viewTreeObserver.addOnGlobalLayoutListener {
-            val dialog = dialog as BottomSheetDialog
-            val bottomSheet =
-                dialog.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet) as FrameLayout?
-            val behavior = BottomSheetBehavior.from(bottomSheet!!)
-            behavior.state = BottomSheetBehavior.STATE_EXPANDED
-            behavior.peekHeight = 0
-        }
 
         config = AppUtil.getSavedConfig(activity)!!
         initViews()
@@ -75,12 +62,13 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
         configFonts()
         view_config_font_size_seek_bar.progress = config.fontSize
         configSeekBar()
+        configFontSizeSelector()
         selectFont(config.font, false)
         isNightMode = config.isNightMode
         if (isNightMode) {
-            container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.night))
+            //container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.night))
         } else {
-            container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
+           // container.setBackgroundColor(ContextCompat.getColor(context!!, R.color.white))
         }
 
         if (isNightMode) {
@@ -96,17 +84,41 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
     }
 
+    private fun configFontSizeSelector() {
+        when (config.fontSize) {
+            0 -> font_xs.isChecked = true
+            1 -> font_s.isChecked = true
+            2 -> font_m.isChecked = true
+            3 -> font_l.isChecked = true
+            4 -> font_xl.isChecked = true
+        }
+        chip_group_font_size.setOnCheckedChangeListener { _, checkedId ->
+            when (checkedId) {
+                R.id.font_xs -> config.fontSize = 0
+                R.id.font_s -> config.fontSize = 1
+                R.id.font_m -> config.fontSize = 2
+                R.id.font_l -> config.fontSize = 3
+                R.id.font_xl -> config.fontSize = 4
+            }
+            refreshConfig()
+        }
+    }
+
+    private fun refreshConfig() {
+        AppUtil.saveConfig(activity, config)
+        EventBus.getDefault().post(ReloadDataEvent())
+    }
+
     private fun inflateView() {
 
         if (config.allowedDirection != Config.AllowedDirection.VERTICAL_AND_HORIZONTAL) {
-            view5.visibility = View.GONE
-            buttonVertical.visibility = View.GONE
-            buttonHorizontal.visibility = View.GONE
+            chipVertical.visibility = View.GONE
+            chipHorizontal.visibility = View.GONE
         }
 
         view_config_ib_day_mode.setOnClickListener {
             isNightMode = true
-            toggleBlackTheme()
+            //toggleBlackTheme()
             view_config_ib_day_mode.isSelected = true
             view_config_ib_night_mode.isSelected = false
             setToolBarColor()
@@ -117,7 +129,7 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         view_config_ib_night_mode.setOnClickListener {
             isNightMode = false
-            toggleBlackTheme()
+            //toggleBlackTheme()
             view_config_ib_day_mode.isSelected = false
             view_config_ib_night_mode.isSelected = true
             UiUtil.setColorResToDrawable(R.color.app_gray, view_config_ib_day_mode.drawable)
@@ -127,27 +139,27 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
         }
 
         if (activityCallback.direction == Config.Direction.HORIZONTAL) {
-            buttonHorizontal.isSelected = true
+            chipHorizontal.isSelected = true
         } else if (activityCallback.direction == Config.Direction.VERTICAL) {
-            buttonVertical.isSelected = true
+            chipVertical.isSelected = true
         }
 
-        buttonVertical.setOnClickListener {
+        chipVertical.setOnClickListener {
             config = AppUtil.getSavedConfig(context)!!
             config.direction = Config.Direction.VERTICAL
             AppUtil.saveConfig(context, config)
             activityCallback.onDirectionChange(Config.Direction.VERTICAL)
-            buttonHorizontal.isSelected = false
-            buttonVertical.isSelected = true
+            chipHorizontal.isSelected = false
+            chipVertical.isSelected = true
         }
 
-        buttonHorizontal.setOnClickListener {
+        chipHorizontal.setOnClickListener {
             config = AppUtil.getSavedConfig(context)!!
             config.direction = Config.Direction.HORIZONTAL
             AppUtil.saveConfig(context, config)
             activityCallback.onDirectionChange(Config.Direction.HORIZONTAL)
-            buttonHorizontal.isSelected = true
-            buttonVertical.isSelected = false
+            chipHorizontal.isSelected = true
+            chipVertical.isSelected = false
         }
     }
 
@@ -157,12 +169,12 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
             config.themeColor,
             ContextCompat.getColor(context!!, R.color.grey_color)
         )
-        buttonVertical.setTextColor(colorStateList)
-        buttonHorizontal.setTextColor(colorStateList)
-        view_config_font_andada.setTextColor(colorStateList)
-        view_config_font_lato.setTextColor(colorStateList)
-        view_config_font_lora.setTextColor(colorStateList)
-        view_config_font_raleway.setTextColor(colorStateList)
+        //chipVertical.setTextColor(colorStateList)
+        //chipHorizontal.setTextColor(colorStateList)
+        //view_config_font_andada.setTextColor(colorStateList)
+        //view_config_font_lato.setTextColor(colorStateList)
+        //view_config_font_lora.setTextColor(colorStateList)
+        //view_config_font_raleway.setTextColor(colorStateList)
 
         view_config_font_andada.setOnClickListener { selectFont(Constants.FONT_ANDADA, true) }
         view_config_font_lato.setOnClickListener { selectFont(Constants.FONT_LATO, true) }
@@ -204,7 +216,7 @@ class ConfigBottomSheetDialogFragment : BottomSheetDialogFragment() {
 
         colorAnimation.addUpdateListener { animator ->
             val value = animator.animatedValue as Int
-            container.setBackgroundColor(value)
+            //container.setBackgroundColor(value)
         }
 
         colorAnimation.addListener(object : Animator.AnimatorListener {

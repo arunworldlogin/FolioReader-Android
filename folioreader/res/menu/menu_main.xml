@@ -8,14 +8,30 @@
         android:id="@+id/itemSearch"
         android:icon="@drawable/ic_search"
         android:title="@string/menu_item_search"
-        app:showAsAction="ifRoom"
+        app:showAsAction="always"
+        tools:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionIndex"
+        android:icon="@drawable/ic_index"
+        android:title="@string/menu_item_contents"
+        app:showAsAction="always"
+        app:iconTint="@color/default_theme_accent_color"
         tools:showAsAction="always" />
 
     <item
         android:id="@+id/itemConfig"
-        android:icon="@drawable/icon_font"
+        android:icon="@drawable/ic_settings"
         android:title="@string/menu_item_config"
+        app:showAsAction="always"
+        tools:showAsAction="always" />
+
+    <item
+        android:id="@+id/actionBookmarked"
+        android:icon="@drawable/ic_bookmark"
+        android:title="@string/menu_item_bookmarks"
         app:showAsAction="ifRoom"
+        app:iconTint="@color/default_theme_accent_color"
         tools:showAsAction="always" />
 
     <item

@@ -7,26 +7,34 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
 import com.folioreader.Config;
 import com.folioreader.R;
 import com.folioreader.model.TOCLinkWrapper;
 import com.folioreader.ui.adapter.TOCAdapter;
 import com.folioreader.util.AppUtil;
+
 import org.readium.r2.shared.Link;
 import org.readium.r2.shared.Publication;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.folioreader.Constants.*;
+import static com.folioreader.Constants.BOOK_TITLE;
+import static com.folioreader.Constants.CHAPTER_SELECTED;
+import static com.folioreader.Constants.PUBLICATION;
+import static com.folioreader.Constants.SELECTED_CHAPTER_POSITION;
+import static com.folioreader.Constants.TYPE;
 
-public class TableOfContentFragment extends Fragment implements TOCAdapter.TOCCallback {
+public class TableOfContentFragment2 extends DialogFragment implements TOCAdapter.TOCCallback {
     private TOCAdapter mTOCAdapter;
     private RecyclerView mTableOfContentsRecyclerView;
     private TextView errorView;
@@ -34,9 +42,9 @@ public class TableOfContentFragment extends Fragment implements TOCAdapter.TOCCa
     private String mBookTitle;
     private Publication publication;
 
-    public static TableOfContentFragment newInstance(Publication publication,
-                                                     String selectedChapterHref, String bookTitle) {
-        TableOfContentFragment tableOfContentFragment = new TableOfContentFragment();
+    public static TableOfContentFragment2 newInstance(Publication publication,
+                                                      String selectedChapterHref, String bookTitle) {
+        TableOfContentFragment2 tableOfContentFragment = new TableOfContentFragment2();
         Bundle args = new Bundle();
         args.putSerializable(PUBLICATION, publication);
         args.putString(SELECTED_CHAPTER_POSITION, selectedChapterHref);
@@ -70,6 +78,7 @@ public class TableOfContentFragment extends Fragment implements TOCAdapter.TOCCa
         super.onViewCreated(view, savedInstanceState);
         mTableOfContentsRecyclerView = (RecyclerView) view.findViewById(R.id.recycler_view_menu);
         errorView = (TextView) view.findViewById(R.id.tv_error);
+
         configRecyclerViews();
         initAdapter();
     }
